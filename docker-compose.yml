@@ -1,0 +1,47 @@
+version: '2.4'
+
+services:
+  octoprint-flsun:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 1980:80
+    devices:    
+      - /dev/ttyACM0:/dev/ttyACM0
+      # - /dev/video0:/dev/video0
+    #environment:
+    #  - ENABLE_MJPG_STREAMER=true
+    volumes:
+     - octoprint-flsun:/octoprint    
+  
+  octoprint-cocoon:
+    image: octoprint/octoprint
+    restart: unless-stopped
+    ports:
+      - 1981:80
+    devices:    
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      # - /dev/video0:/dev/video0
+    #environment:
+    #  - ENABLE_MJPG_STREAMER=true
+    volumes:
+     - octoprint-cocoon:/octoprint
+
+  config-editor:
+    image: linuxserver/code-server
+    ports:
+      - 8443:8443
+    depends_on:
+      - octoprint
+    restart: unless-stopped
+    environment:
+      - PUID=0
+      - GUID=0
+      - TZ=Australia/Melbourne
+    volumes:
+      - octoprint-flsun:/printers/flsun
+      - octoprint-cocoon:/printers/cocoon
+
+volumes:
+  octoprint-flsun:
+  octoprint-cocoon:
