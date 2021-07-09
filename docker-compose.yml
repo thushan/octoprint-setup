@@ -1,4 +1,4 @@
-version: '2.4'
+version: '3.6'
 
 services:
   octoprint-flsun:
@@ -7,7 +7,7 @@ services:
     ports:
       - 1980:80
     devices:    
-      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/serial/by-id/usb-marlinfw.org_Marlin_USB_Device_03030F0D534D08544DFC0B33F5000006-if00:/dev/ttyACM0
       # - /dev/video0:/dev/video0
     #environment:
     #  - ENABLE_MJPG_STREAMER=true
@@ -20,7 +20,7 @@ services:
     ports:
       - 1981:80
     devices:    
-      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/serial/by-id/usb-1a86_USB2.0-Serial-if00-port0:/dev/ttyUSB0
       # - /dev/video0:/dev/video0
     #environment:
     #  - ENABLE_MJPG_STREAMER=true
