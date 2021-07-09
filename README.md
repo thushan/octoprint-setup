@@ -39,6 +39,18 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hu
 
 On a side note, if you're curious, there's an article from [Sam Tardieu](https://rfc1149.net/) about [the difference between ttyUSB and ttyACM](https://rfc1149.net/blog/2013/03/05/what-is-the-difference-between-devttyusbx-and-devttyacmx/).
 
+## Set UDEV Rule
+
+Unfortunately by default, any serial devices can only be used by root users and if you're running  Docker as a non-root account, we need to create a new `udev` rule to allow the USB devices.
+
+Create a new file at `/etc/udev/rules.d/99-serial.rules` with the following:
+
+```
+KERNEL=="ttyUSB[0-9]*",MODE="0666"
+```
+
+Gives users read/write access to your USB devices.
+
 ## Running the stack
 
 You can bring up the stack with
