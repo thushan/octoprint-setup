@@ -63,5 +63,6 @@ As long as you have two printers plugged in to any of the USB ports, you'll have
 
 * **FLSun Super Racer** - port 1980 
 * **Wanhao Duplicator i3** - port 1981
+* **Code Server (VSCode)** - port 8443; you can mount `/printers` which contains the configuration for both Octoprint volumes.
 
 You can wire up Octofarm to this container to bind to port 80 - coming soon.
